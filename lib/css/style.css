@@ -1,0 +1,200 @@
+body {
+	margin: 0px;
+	padding:0px;
+	background: #FBF8F1;
+	width:800px;
+	
+}
+
+ul, li {
+	list-style:none;
+    padding-left: 0px;
+}
+
+.kiri{
+	float:left;
+	margin:50px 0px;
+    max-width: 200px;
+}
+
+.kanan{
+	float:right;
+	margin:10px 0;
+}
+
+.box{
+	width:190px;
+	padding-bottom:10px;
+	border:1px solid #ddd;
+	border-radius:5px;
+	text-align:center;
+	background-color:#fff;
+	-webkit-box-shadow: 0 8px 6px -8px #222;
+	   -moz-box-shadow: 0 8px 6px -8px #222;
+	        box-shadow: 0 8px 6px -8px #222;
+			overflow:hidden;
+}
+
+.box p{
+	margin:0;
+	padding:0;
+}
+
+.boxmenu{
+	width:190px;
+	border:1px solid #ddd;
+	border-radius:5px;
+	text-align:center;
+	background-color:#FBF5E7;
+	-webkit-box-shadow: 0 8px 6px -8px #222;
+	   -moz-box-shadow: 0 8px 6px -8px #222;
+	        box-shadow: 0 8px 6px -8px #222;
+			overflow:hidden;
+
+}
+
+.boxmenu span{
+	display:block;
+	padding:5px 0;
+	color:#fcfcfc;
+	font-weight:bold;
+	background-color:#660000;
+}
+
+.boxmenu ul{
+	padding:0;
+	margin:0;
+	text-align:left;
+}
+
+.boxmenu ul li{
+	padding:3px;
+	margin:0;
+	border-bottom:1px solid #ddd;
+}
+
+
+
+.box-kanan{
+	width:560px;
+	padding-bottom:10px;
+	border-radius:5px;
+	min-height: 1000px;
+	-webkit-box-shadow: 0 8px 6px -8px #222;
+	   -moz-box-shadow: 0 8px 6px -8px #222;
+	        box-shadow: 0 8px 6px -8px #222;
+			overflow:hidden;
+}
+
+/*  Tabs */
+#tabs {
+  overflow: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#tabs li {
+  float: left;
+  margin: 0 .5em 0 0;
+}
+
+#tabs a {
+  position: relative;
+  background: #428bca;
+  background-image: linear-gradient(to bottom,#428bca 0,#3278b3 100%); 
+  padding: .7em 3.5em;
+  float: left;
+  text-decoration: none;
+  color: #fff;
+  box-shadow: 0 2px 2px rgba(0,0,0,.4);
+}
+
+#tabs a:hover,
+#tabs a:hover::after,
+#tabs a:focus,
+#tabs a:focus::after {
+  background: #6E9FCA;
+}
+
+#tabs a:focus {
+  outline: 0;
+}
+
+#tabs a::after {
+  content:'';
+  position:absolute;
+  z-index: 1;
+  top: 0;
+  right: -.5em;  
+  bottom: 0;
+  width: 1em;
+  background: #428bca;
+  background-image: linear-gradient(to bottom,#428bca 0,#3278b3 100%);
+  box-shadow: 2px 2px 2px rgba(0,0,0,.4);
+  transform: skew(10deg);
+}
+
+/*Untuk tab yang sedang aktif pada saat itu*/
+#tabs #current a,
+#tabs #current a::after {
+  background: #4D708E;
+  z-index: 3;
+}
+
+#content {
+  background: #fff;
+  padding: 10px;
+	border:1px solid #ddd;
+	border-top:0;
+	border-bottom:0;
+  min-height: 800px;
+  position: relative;
+  z-index: 2; 
+  border-radius: 0 5px 5px 5px;
+  box-shadow: 0 -2px 3px -2px rgba(0, 0, 0, .5);
+}
+
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="username"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.panel{width: 200px;}
