@@ -12,7 +12,6 @@
 			$(document).ready(function(){
 
 				$(".editor").jqte();
-					
 				$('.form').ajaxForm({
 					success : function (response) {
 						if(response.match(/dosen/)){

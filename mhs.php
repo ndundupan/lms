@@ -29,30 +29,25 @@
 		<script src="lib/js/bootstrap.min.js"></script>
 		<script>
 			$(document).ready(function(){
-				$("#content").find("[id^='tab']").hide();
-				$("#tabs li:first").attr("id","current");
-				$("#content #tab1").fadeIn();
+				$("#content").find("[id^='tab']").hide(); // Hide all content
+				$("#tabs li:first").attr("id","current"); // Activate the first tab
+				$("#content #tab1").fadeIn(); // Show first tab's content
 
 				$('#tabs a').click(function(e) {
 					e.preventDefault();
-					if ($(this).closest("li").attr("id") == "current"){
+					if ($(this).closest("li").attr("id") == "current"){ //detection for current tab
 					 return;
 					}
 					else{
-					  $("#content").find("[id^='tab']").hide();
-					  $("#tabs li").attr("id","");
-					  $(this).parent().attr("id","current");
-					  $('#' + $(this).attr('name')).fadeIn();
+					  $("#content").find("[id^='tab']").hide(); // Hide all content
+					  $("#tabs li").attr("id",""); //Reset id's
+					  $(this).parent().attr("id","current"); // Activate this
+					  $('#' + $(this).attr('name')).fadeIn(); // Show content for the current tab
 					}
 				});
 
-
 				$(".editor").jqte();
-
-
 				$( ".tanggal" ).datepicker({ dateFormat: 'yy-mm-dd', showAnim: "bounce" });
-
-
 				$('.form').ajaxForm({
 					success : function (response) {
 						alert("Data Berhasil Disimpan")
@@ -75,7 +70,6 @@
 					 });
 				  };
 				});
-
 
 				$( ".komentar_tambah" ).click(function(){
 				  	var materiId=$(this).attr("id");
@@ -108,10 +102,7 @@
 				  };
 				});
 
-
-					$('#tugas_detail').appendTo("body");
-				// });
-
+				$('#tugas_detail').appendTo("body");
 				$(".unduh").click(function(){
 					var source=$(this).attr('id');
 					$.get("download_folder.php",{src:source},function(data){
@@ -145,8 +136,6 @@
                             echo '</div>';
 						?>
 					</div>
-
-
 					<div class='panel panel-primary'>
 						<div class="panel-heading">
 							<h3 class="panel-title">Mata Kuliah</h3>
@@ -169,7 +158,7 @@
 											echo "<li><a href='?matkul=$kodeMatkul&kelas=$kodeKelas'>$namaMatkul</a></li>";
 										}
 									}else{
-										echo "";
+										echo "Anda Belum terdaftar pada kelas apapun. Untuk lebih jelasnya, silahkan menghubungi pihak Admin";
 									}
 
 								?>
@@ -186,7 +175,6 @@
 							</ul>';
 						}
 						echo '<div id="content">';
-
 						if(isset($_GET['matkul'])){
 							$matkul=$_GET['matkul'];
 							$kelas=$_GET['kelas'];
@@ -196,7 +184,6 @@
 							$namaMatkul=mysql_fetch_assoc($sql);
 							$namaMatkul=$namaMatkul['matkul_nama'];
 							echo "<h2 style='text-align:center;margin-bottom:50px;'>Mata Kuliah $namaMatkul</h2>";
-
 
 							echo "<div id='materi_daftar' style='margin-top:20px;'>";
 							$sql=mysql_query("select * FROM materi WHERE kelas_kode='$kelas' ORDER BY materi_tanggal Desc");
@@ -221,7 +208,6 @@
 										</div>
 										<div class='panel-footer materi_$materiKode' style='display:none;'>";
 											echo "<ol id='update".$baris['materi_kode']."' class='timeline' style='padding:0;overflow:auto; height:300px;'>";
-
 											$sqlKomentar=mysql_query("select * from komentar where komentar_kode=".$baris['materi_kode']." AND komentar_jenis='0'");
 											while($barisKomentar=mysql_fetch_assoc($sqlKomentar)){
 												$sqlNama=mysql_query("SELECT * FROM dosen where dosen_nip='".$barisKomentar['komentar_user']."'");
@@ -256,7 +242,6 @@
 					</div>
 						<div id="tab2">
 							<h2 style='text-align:center;margin-bottom:50px;'>Mata Kuliah <?php echo $namaMatkul?></h2>
-
 							<div id='tugas_daftar'>
 
 								<?php
@@ -283,7 +268,6 @@
 
 													<div class='panel-footer tugas_$pertemuan' style='display:none;'>";
 														echo "<ol id='update".$baris['tugas_kode']."' class='timeline' style='padding:0;overflow:auto; height:300px;'>";
-
 														$sqlKomentar=mysql_query("select * from komentar where komentar_kode=".$baris['tugas_kode']." AND komentar_jenis='1'");
 														while($barisKomentar=mysql_fetch_assoc($sqlKomentar)){
 															$sqlNama=mysql_query("SELECT * FROM dosen where dosen_nip='".$barisKomentar['komentar_user']."'");
@@ -315,7 +299,6 @@
 
 							</div>
 
-							
 							<div class="modal fade bs-example-modal-lg" id="tugas_detail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 							  <div class="modal-dialog modal-lg">
 								<div class="modal-content">
@@ -336,10 +319,31 @@
 					</div>
 					</div>
 				</div>
-				<?php
+
+			<?php
+				}else{
+					echo "<center><h3>Silakan Pilih Mata Kuliah</h3></center>";
+					echo "<br/>";
+					echo "<ul>";
+					$sql=mysql_query("SELECT m.matkul_kode as matkul_kode, m.matkul_nama as matkul_nama, ma.kelas_kode FROM mhs_kelas ma
+					INNER JOIN kelas k
+					ON ma.kelas_kode=k.kelas_kode
+					INNER JOIN matkul m
+					ON m.matkul_kode=k.matkul_kode
+					WHERE ma.mhs_nrp='$nrp' AND ma.periode_kode='20132'");
+					$countMatkul=mysql_num_rows($sql);
+					if($countMatkul>=1){
+						while($barisMatkul=mysql_fetch_assoc($sql)){
+							$kodeKelas=$barisMatkul['kelas_kode'];
+							$kodeMatkul=$barisMatkul['matkul_kode'];
+							$namaMatkul=$barisMatkul['matkul_nama'];
+							echo "<li><a href='?matkul=$kodeMatkul&kelas=$kodeKelas'>$namaMatkul</a></li>";
+						}
 					}else{
-						echo "Silahkan pilih daftar mata kuliah di samping";
+						echo "Anda Belum terdaftar pada kelas apapun. Untuk lebih jelasnya, silahkan menghubungi pihak Admin";
 					}
+					echo "</ul>";
+				}
 				?>
 			</div>
 		</div>
